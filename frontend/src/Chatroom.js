@@ -1,17 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './ChatRoom.css';
+import './App.css';
 
-const Message = ({chat, user}) => (
-    <li className={`chat ${user === chat.username ? "right" : "left"}`}>
-        {user !== chat.username
-            && <img src={chat.img} alt={`${chat.username}'s profile pic`} />
-        }
-        {chat.content}
-    </li>
-);
+import Message from './Message.js';
 
-class ChatRoom extends React.Component {
+class Chatroom extends React.Component {
     constructor(props) {
         super(props);
 
@@ -86,7 +79,7 @@ class ChatRoom extends React.Component {
 
         return (
             <div className="chatroom">
-                <h3>Channel</h3>
+                <h3>Chilltime</h3>
                 <ul className="chats" ref="chats">
                     {
                         chats.map((chat) => 
@@ -103,4 +96,4 @@ class ChatRoom extends React.Component {
     }
 }
 
-export default ChatRoom;
+export default Chatroom;
