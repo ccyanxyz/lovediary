@@ -1,6 +1,9 @@
 pragma solidity >= 0.4.24;
+pragma experimental ABIEncoderV2;
 
-contract LogicV0 {
+import "./LoveDiaryStorage.sol";
+
+contract LoveDiaryLogicV0 is LoveDiaryStorage {
 	
 	// getters
 	function get_user(address addr) public view returns (User) {
@@ -12,7 +15,7 @@ contract LogicV0 {
 	}
 
 	function get_channel(bytes32 cid) public view returns (Channel) {
-		return channels[cid]
+		return channels[cid];
 	}
 
 	// setters
@@ -25,7 +28,7 @@ contract LogicV0 {
 	}
 
 	function set_sex(address addr, bool sex) public {
-		users[addr].sex = status;
+		users[addr].sex = sex;
 	}
 
 	function register_user(address addr, bytes nickname, bool status, bool sex) public {
@@ -43,7 +46,7 @@ contract LogicV0 {
 		Channel memory c;
 		c.user1 = msg.sender;
 		c.user2 = user2;
-		c.cid = keccak256(c.user1 + c.user2);
+		c.cid = keccak256(abi.encodePacked(c.user1, c.user2));
 		c.status = false;
 		c.timestamp = timestamp;
 
@@ -73,17 +76,17 @@ contract LogicV0 {
 	}
 
 	// send message
-	function send_msg(bytes multihash, uint32 timestamp, uint type) public returns (bool) {
+	function send_msg(bytes multihash, uint32 timestamp, uint ctype) public returns (bool) {
 		require(users[msg.sender].cid != 0x0);
 
 		Message memory m;
 		m.sender = msg.sender;
 		m.multihash = multihash;
 		m.timestamp = timestamp;
-		m.type = type;
-		m.mid = keccak256(m.sender + m.multihash + m.timestamp);
+		m.ctype = ctype;
+		m.mid = keccak256(abi.encodePacked(m.sender, m.multihash, m.timestamp));
 
-		msgs[mid] = m;
+		msgs[m.mid] = m;
 		return true;
 	}
 }

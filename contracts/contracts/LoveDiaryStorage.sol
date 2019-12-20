@@ -1,12 +1,14 @@
 pragma solidity >=0.4.24;
 
-contract Storage is OwnedUpgradeabilityProxy {
+import "./OwnedUpgradeabilityProxy.sol";
+
+contract LoveDiaryStorage is OwnedUpgradeabilityProxy {
 	// message in channel or friend request message
 	struct Message {
 		address sender;
 		bytes multihash;
 		uint32 timestamp;
-		uint type; // 0 for string, 1 for img, 2 for video
+		uint ctype; // content type, 0 for string, 1 for img, 2 for video
 		bytes32 mid; // message id = keccak(sender + multihash + timestamp)
 	}
 

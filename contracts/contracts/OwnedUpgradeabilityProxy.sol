@@ -20,7 +20,7 @@ contract OwnedUpgradeabilityProxy is UpgradeabilityProxy {
   /**
   * @dev the constructor sets the original owner of the contract to the sender account.
   */
-  function OwnedUpgradeabilityProxy() public {
+  constructor() public {
     setUpgradeabilityOwner(msg.sender);
   }
 
@@ -80,6 +80,6 @@ contract OwnedUpgradeabilityProxy is UpgradeabilityProxy {
    */
   function upgradeToAndCall(address implementation, bytes data) payable public onlyProxyOwner {
     upgradeTo(implementation);
-    require(this.call.value(msg.value)(data));
+    require(address(this).call.value(msg.value)(data));
   }
 }
