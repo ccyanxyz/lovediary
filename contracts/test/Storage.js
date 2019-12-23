@@ -1,26 +1,23 @@
+const LoveDiaryStorage = artifacts.require('LoveDiaryStorage')
+const LoveDiaryLogicV0 = artifacts.require('LoveDiaryLogicV0')
 
-const encodeCall = require('./helpers/encodeCall')
-const OwnedUpgradeabilityProxy = artifacts.require('OwnedUpgradeabilityProxy')
-const Token_V0 = artifacts.require('Token_V0')
-
-contract('OwnedUpgradeabilityProxy', ([_, proxyOwner, tokenOwner, anotherAccount]) => {
+contract('LoveDiaryStorage', ([_, proxyOwner, tokenOwner, anotherAccount]) => {
   let proxy
   let impl_v0
-  let token_v0
-  const initializeData = encodeCall('initialize', ['address'], [tokenOwner]);
+  let logic_v0
 
   beforeEach(async function () {
-    proxy = await OwnedUpgradeabilityProxy.new({ from: proxyOwner })
-    impl_v0 = await Token_V0.new()
-    token_v0 = Token_V0.at(proxy.address)
-    const initializeData = encodeCall('initialize', ['address'], [tokenOwner])
-    await proxy.upgradeToAndCall(impl_v0.address, initializeData, { from: proxyOwner })
+    proxy = await LoveDiaryStorage.new({ from: proxyOwner })
+    impl_v0 = await LoveDiaryLogicV0.new()
+    logic_v0 = LoveDiaryLogicV0.at(proxy.address)
+    await proxy.upgradeTo(impl_v0.address, { from: proxyOwner })
   });
 
   it('should store implementation in specified location', async function () {
-    const position = web3.sha3("org.zeppelinos.proxy.implementation");
+    const position = web3.utils.sha3("org.zeppelinos.proxy.implementation");
     const storage = await web3.eth.getStorageAt(proxy.address, position);
-    assert.equal(storage, impl_v0.address);
+	const addr = web3.utils.toChecksumAddress(storage);
+    assert.equal(addr, impl_v0.address);
   });
   
 });
