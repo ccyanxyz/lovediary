@@ -3,9 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "react-scripts": "1.0.11"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+	"react-router": "3.2.5",
+    "react-scripts": "1.0.11",
+	"react-flippy": "0.1.5",
+	"@material-ui/core": "4.8.0",
+	"@material-ui/icons": "4.5.1",
+	"web3": "^1.0.0-beta.46"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -6,7 +6,7 @@ contract LoveDiaryStorage is OwnedUpgradeabilityProxy {
 	// message in channel or friend request message
 	struct Message {
 		address sender;
-		bytes multihash;
+		bytes multihash; // msg content if ctype == 0, else ipfs multihash
 		uint32 timestamp;
 		uint ctype; // content type, 0 for string, 1 for img, 2 for video
 		bytes32 mid; // message id = keccak(sender + multihash + timestamp)

@@ -70,6 +70,8 @@ contract LoveDiaryLogicV0 is LoveDiaryStorage {
 		require(channels[cid].user2 == msg.sender && users[msg.sender].cid == 0x0);
 
 		channels[cid].status = true;
+		users[msg.sender].status = true;
+		users[channels[cid].user1].status = true;
 		users[msg.sender].cid = cid;
 		delete invitations[msg.sender];
 		return true;
