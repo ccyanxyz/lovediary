@@ -1,8 +1,4 @@
-# 区块链与数字货币课程设计--LoveDiary
-
-陈岩 3160104625
-
-
+# LoveDiary
 
 ## 1. 项目立意
 
@@ -72,7 +68,3 @@ LoveDiaryStorage继承自[OwnedUpgradeabilityProxy](https://github.com/OpenZeppe
 1. 支持图片、视频等文件的上传，文件保存到ipfs，合约保存文件对应的multihash；目前只支持文本
 2. 数据本地加密后上传，目前数据都是明文保存在链上，有隐私泄露风险
 3. 改进UI界面
-
-## 5. 小组分工
-
-陈岩（3160104625）独立完成
