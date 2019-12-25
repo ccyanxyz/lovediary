@@ -18,6 +18,10 @@ contract LoveDiaryLogicV0 is LoveDiaryStorage {
 		return channels[cid];
 	}
 
+	function get_msg(bytes32 mid) public view returns (Message) {
+		return msgs[mid];
+	}
+
 	// setters
 	function set_nickname(address addr, bytes nickname) public {
 		users[addr].nickname = nickname;

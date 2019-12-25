@@ -78,7 +78,7 @@ class InfoCard extends React.Component {
 		var timestamp = Math.round(Date.now() / 1000);
 		var ctype = 0;
 		const ret = await this.logic.methods.register_channel(this.state.receiver, timestamp).send({ from: this.state.account });
-		if(ret == false) {
+		if(ret.status == false) {
 			console.log("send invitation failed");
 		} else {
 			console.log("send invitation success");
