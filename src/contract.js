@@ -1,5 +1,5 @@
-export const StorageAddress = "0xCfEB869F69431e42cdB54A4F4f105C19C080A601";
-export const LogicV0Address = "0xC89Ce4735882C9F0f0FE26686c53074E09B0D550";
+export const StorageAddress = "0xc3Fa99c272958bA6a5422eDC269381db3a7a4737";
+export const LogicV0Address = "0xc85D5bD2f02EEF04F6639Ea7A3fA5F5388bD4206";
 
 export const StorageABI = [{'constant': true,
   'inputs': [],
@@ -200,6 +200,19 @@ export const LogicV0ABI = [{'constant': true,
      {'name': 'status', 'type': 'bool'},
      {'name': 'timestamp', 'type': 'uint32'},
      {'name': 'msg_ids', 'type': 'bytes32[]'}],
+    'name': '',
+    'type': 'tuple'}],
+  'payable': false,
+  'stateMutability': 'view',
+  'type': 'function'},
+ {'constant': true,
+  'inputs': [{'name': 'mid', 'type': 'bytes32'}],
+  'name': 'get_msg',
+  'outputs': [{'components': [{'name': 'sender', 'type': 'address'},
+     {'name': 'multihash', 'type': 'bytes'},
+     {'name': 'timestamp', 'type': 'uint32'},
+     {'name': 'ctype', 'type': 'uint256'},
+     {'name': 'mid', 'type': 'bytes32'}],
     'name': '',
     'type': 'tuple'}],
   'payable': false,

@@ -42,7 +42,6 @@ class RegisterCard extends React.Component {
 		// check if already registered, if yes, goto main page
 		const user = await this.logic.methods.get_user(this.state.account).call();
 		console.log(user);
-		console.log(this.state.account);
 		if(user.nickname == "0x") {
 			console.log("not registered")
 		} else {
@@ -54,6 +53,7 @@ class RegisterCard extends React.Component {
 	async register() {
 		const impl = await this.storage.methods.implementation().call();
 		console.log(impl)
+		console.log(this.state)
 		// call contract, register user
 		var sex = false; // false for boy, true for girl
 		if(this.state.checked.includes("girl")) {

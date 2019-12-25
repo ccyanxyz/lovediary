@@ -93,6 +93,7 @@ contract LoveDiaryLogicV0 is LoveDiaryStorage {
 		m.mid = keccak256(abi.encodePacked(m.sender, m.multihash, m.timestamp));
 
 		msgs[m.mid] = m;
+		channels[users[msg.sender].cid].msg_ids.push(m.mid);
 		return true;
 	}
 }

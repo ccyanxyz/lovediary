@@ -46,20 +46,22 @@ class Chatroom extends React.Component {
 
 		// get channel messages
 		const channel = await this.logic.methods.get_channel(this.state.info.cid).call();
+		console.log(channel)
 		this.setState({ channel: channel });
 
 		var chats = [];
 		for(var i = 0; i < channel.msg_ids.length; ++i) {
 			var msg_id = channel.msg_ids[i];
 			const msg = await this.logic.methods.get_msg(msg_id).call();
+			var content = this.web3.utils.hexToUtf8(msg.multihash);
 			var chat = {
 				username: msg.sender,
-                content: <p>this.web3.utils.hexToUtf8(msg.multihash)</p>,
+                content: <p>{content}</p>,
                 img: "http://i.imgur.com/Tj5DGiO.jpg",
             }
 			chats.push(chat);
 		}
-
+		console.log(chats)
 		this.setState({ chats: chats });
 	}
 
@@ -104,7 +106,7 @@ class Chatroom extends React.Component {
     }
 
     render() {
-        const username = this.state.info.nickname;
+        const username = this.state.account;
         const { chats } = this.state;
 
         return (

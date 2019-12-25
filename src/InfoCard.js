@@ -101,11 +101,12 @@ class InfoCard extends React.Component {
 		const ret = await this.logic.methods.approve_channel(cid).send({ from: this.state.account });
 		const user = await this.logic.methods.get_user(this.state.account).call();
 		console.log(user);
-		if(ret == true) {
+		if(ret.status == true) {
 			console.log("channel approve success");
 		} else {
 			console.log("channel approve failed");
 		}
+		this.getInfo();
 	}
 
     render() {
