@@ -1,5 +1,5 @@
-export const StorageAddress = "0xc3Fa99c272958bA6a5422eDC269381db3a7a4737";
-export const LogicV0Address = "0xc85D5bD2f02EEF04F6639Ea7A3fA5F5388bD4206";
+export const StorageAddress = "0x158a820D6034ADC37f90649e7F108bD6D79Fd696";
+export const LogicV0Address = "0x80A9d7D03d575CDB0c1f50ac969A55Dc41E2E666";
 
 export const StorageABI = [{'constant': true,
   'inputs': [],
