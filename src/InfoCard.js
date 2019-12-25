@@ -1,12 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Chip from '@material-ui/core/Chip';
 import FormGroup from '@material-ui/core/FormGroup';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import DoneIcon from '@material-ui/icons/Done';
 import './App.css';
-import Message from './Message.js';
 
 import Web3 from 'web3';
 import { StorageAddress, StorageABI, LogicV0ABI } from './contract.js';
@@ -56,7 +54,7 @@ class InfoCard extends React.Component {
 			};
 			invitations.push(inv);
 		}
-		if(invitations.length == 0) {
+		if(invitations.length === 0) {
 			invitations = [
 				{ 
 					address: "0x0",
@@ -76,9 +74,8 @@ class InfoCard extends React.Component {
 	async sendInvitation() {
 		console.log(this.state)
 		var timestamp = Math.round(Date.now() / 1000);
-		var ctype = 0;
 		const ret = await this.logic.methods.register_channel(this.state.receiver, timestamp).send({ from: this.state.account });
-		if(ret.status == false) {
+		if(ret.status === false) {
 			console.log("send invitation failed");
 		} else {
 			console.log("send invitation success");
@@ -90,18 +87,18 @@ class InfoCard extends React.Component {
 		var user1 = e.target.innerHTML;
 		var cid;
 		for(var i = 0; i < this.state.invitations.length; ++i) {
-			if(this.state.invitations[i].nickname == user1) {
+			if(this.state.invitations[i].nickname === user1) {
 				cid = this.state.invitations[i].cid;
 			}
 		}
 		console.log(cid)
-		if(cid == "0x0") {
+		if(cid === "0x0") {
 			return;
 		}
 		const ret = await this.logic.methods.approve_channel(cid).send({ from: this.state.account });
 		const user = await this.logic.methods.get_user(this.state.account).call();
 		console.log(user);
-		if(ret.status == true) {
+		if(ret.status === true) {
 			console.log("channel approve success");
 		} else {
 			console.log("channel approve failed");

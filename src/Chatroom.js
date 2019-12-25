@@ -56,7 +56,7 @@ class Chatroom extends React.Component {
 			var chat = {
 				username: msg.sender,
                 content: <p>{content}</p>,
-                img: this.state.info.sex == "Boy" ? "https://img.icons8.com/office/80/000000/user-female-skin-type-1-2.png" : "https://img.icons8.com/dusk/64/000000/user-male-skin-type-5.png",
+                img: this.state.info.sex === "Boy" ? "https://img.icons8.com/office/80/000000/user-female-skin-type-1-2.png" : "https://img.icons8.com/dusk/64/000000/user-male-skin-type-5.png",
 				time: time.toString(),
             }
 			chats.push(chat);
@@ -67,7 +67,7 @@ class Chatroom extends React.Component {
 
 	showTime(e, chat) {
 		console.log(chat.time)
-		if(this.state.showTime == false) {
+		if(this.state.showTime === false) {
 			this.setState({ showTime: true });
 			//e.target.innerHTML = chat.time;
 		} else {
@@ -99,7 +99,7 @@ class Chatroom extends React.Component {
 		var ctype = 0;
 		const ret = await this.logic.methods.send_msg(msg_bytes, timestamp, ctype).send({ from: this.state.account });
 		console.log(ret);
-		if(ret.status == true) {
+		if(ret.status === true) {
 			console.log("send message success");
 		} else {
 			console.log("send message failed");
@@ -110,7 +110,7 @@ class Chatroom extends React.Component {
             chats: this.state.chats.concat([{
                 username: this.state.info.nickname,
                 content: <p>{msg}</p>,
-                img: this.state.info.sex == "Girl" ? "https://img.icons8.com/office/80/000000/user-female-skin-type-1-2.png" : "https://img.icons8.com/dusk/64/000000/user-male-skin-type-5.png",
+                img: this.state.info.sex === "Girl" ? "https://img.icons8.com/office/80/000000/user-female-skin-type-1-2.png" : "https://img.icons8.com/dusk/64/000000/user-male-skin-type-5.png",
 				time: time.toString(),
             }])
         }, () => {

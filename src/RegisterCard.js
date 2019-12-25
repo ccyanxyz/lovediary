@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -43,7 +42,7 @@ class RegisterCard extends React.Component {
 		// check if already registered, if yes, goto main page
 		const user = await this.logic.methods.get_user(this.state.account).call();
 		console.log(user);
-		if(user.nickname == "0x") {
+		if(user.nickname === "0x") {
 			console.log("not registered")
 		} else {
 			console.log("registered")
@@ -66,7 +65,7 @@ class RegisterCard extends React.Component {
 		await this.logic.methods.register_user(address, nickname, status, sex).send({ from: this.state.account });
 		// if register success, goto main page
 		const user = await this.logic.methods.get_user(this.state.account).call();
-		if(user.nickname == "0x") {
+		if(user.nickname === "0x") {
 			console.log("register failed");
 		} else {
 			console.log("register success");
