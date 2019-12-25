@@ -39,6 +39,7 @@ class RegisterCard extends React.Component {
 	}
 
 	async connectWallet() {
+		console.log(this.state)
 		// check if already registered, if yes, goto main page
 		const user = await this.logic.methods.get_user(this.state.account).call();
 		console.log(user);

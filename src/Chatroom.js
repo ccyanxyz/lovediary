@@ -15,15 +15,13 @@ class Chatroom extends React.Component {
 			account: "",
 			channel: "",
 			info: {},
-            chats: [{
-                username: "Alice Chen",
-                content: <p>Definitely! Sounds great!</p>,
-                img: "http://i.imgur.com/Tj5DGiO.jpg",
-            }]
+            chats: [],
+			showTime: false,
         };
 
         this.submitMessage = this.submitMessage.bind(this);
 		this.getInfo = this.getInfo.bind(this);
+		this.showTime = this.showTime.bind(this);
 		
 		this.web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
 		this.storage = new this.web3.eth.Contract(StorageABI, StorageAddress);
@@ -54,15 +52,28 @@ class Chatroom extends React.Component {
 			var msg_id = channel.msg_ids[i];
 			const msg = await this.logic.methods.get_msg(msg_id).call();
 			var content = this.web3.utils.hexToUtf8(msg.multihash);
+			var time = new Date(msg.timestamp * 1000);
 			var chat = {
 				username: msg.sender,
                 content: <p>{content}</p>,
-                img: "http://i.imgur.com/Tj5DGiO.jpg",
+                img: this.state.info.sex == "Boy" ? "https://img.icons8.com/office/80/000000/user-female-skin-type-1-2.png" : "https://img.icons8.com/dusk/64/000000/user-male-skin-type-5.png",
+				time: time.toString(),
             }
 			chats.push(chat);
 		}
 		console.log(chats)
 		this.setState({ chats: chats });
+	}
+
+	showTime(e, chat) {
+		console.log(chat.time)
+		if(this.state.showTime == false) {
+			this.setState({ showTime: true });
+			//e.target.innerHTML = chat.time;
+		} else {
+			this.setState({ showTime: false });
+			//e.target.innerHTML = chat.content.props.children;
+		}
 	}
 
     componentDidMount() {
@@ -94,11 +105,13 @@ class Chatroom extends React.Component {
 			console.log("send message failed");
 		}
 
+		var time = new Date(timestamp * 1000);
 		this.setState({
             chats: this.state.chats.concat([{
                 username: this.state.info.nickname,
                 content: <p>{msg}</p>,
-                img: "http://i.imgur.com/Tj5DGiO.jpg",
+                img: this.state.info.sex == "Girl" ? "https://img.icons8.com/office/80/000000/user-female-skin-type-1-2.png" : "https://img.icons8.com/dusk/64/000000/user-male-skin-type-5.png",
+				time: time.toString(),
             }])
         }, () => {
             ReactDOM.findDOMNode(this.refs.msg).value = "";
@@ -115,7 +128,7 @@ class Chatroom extends React.Component {
                 <ul className="chats" ref="chats">
                     {
                         chats.map((chat) => 
-                            <Message chat={chat} user={username} />
+                            <Message id={chat.time} chat={chat} user={username} onClick={(e) => this.showTime(e, chat)} />
                         )
                     }
                 </ul>
