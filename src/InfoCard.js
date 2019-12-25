@@ -119,7 +119,7 @@ class InfoCard extends React.Component {
 					<h3>My Infomation</h3>
 					</div>
 					<div className="line">
-					<Chip label={this.state.account} color="secondary" variant="outlined" />
+					<Chip label={this.state.info.nickname} color="secondary" variant="outlined" />
 					</div>
 					<div className="line">
 					<FormGroup row>
@@ -144,8 +144,8 @@ class InfoCard extends React.Component {
 					<h3>Send Invitation</h3>
 					</div>
 					<div className="line">
-					<TextField id="outlined" label="Receiver" onChange={this.setReceiver} />
-					<Button varint="contained" color="primary" onClick={e => this.sendInvitation()}>
+					<TextField varint="filled" label="Receiver" color="secondary" onChange={this.setReceiver} />
+					<Button varint="contained" color="secondary" onClick={e => this.sendInvitation()}>
 						Send invitation
 					</Button>
 					</div>
