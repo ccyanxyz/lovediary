@@ -56,7 +56,7 @@ class RegisterCard extends React.Component {
 
 	async register() {
 		await this.getAccount();
-		const impl = await this.storage.methods.implementation().call();
+		await this.storage.methods.implementation().call();
 		console.log(this.state)
 		// call contract, register user
 		var sex = false; // false for boy, true for girl
