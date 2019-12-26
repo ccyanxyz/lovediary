@@ -2,10 +2,13 @@
   "name": "lovediary",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://ccyanxyz.github.io/lovediary",
   "dependencies": {
     "@material-ui/core": "4.8.0",
     "@material-ui/icons": "4.5.1",
     "ethereumjs-abi": "^0.6.5",
+    "gh-pages": "^2.1.1",
+    "ipfs-api": "^18.1.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-flippy": "0.1.5",
@@ -14,14 +17,14 @@
     "truffle": "^4.0.4",
     "truffle-hdwallet-provider": "^1.0.17",
     "web3": "^1.0.0-beta.46",
-    "zeppelin-solidity": "^1.5.0",
-    "ipfs-api": "^18.1.1"
+    "zeppelin-solidity": "^1.5.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build"
   },
   "browserslist": [
     ">0.2%",
