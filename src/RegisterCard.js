@@ -33,8 +33,17 @@ class RegisterCard extends React.Component {
 	}
 
 	async getAccount() {
-		const accounts = await this.web3.eth.getAccounts();
-		this.setState({ account: accounts[0] });
+		try {
+			const accounts = await this.web3.eth.getAccounts();
+			this.setState({ account: accounts[0] });
+		} catch (e) {
+			console.log("web3.getAccounts failed");
+			try {
+				this.state.account = window.ethereum.selectedAddress;
+			} catch(e) {
+				alert("please install/unlock metamask!")
+			}
+		}
 	}
 
 	async connectWallet() {
