@@ -29,24 +29,19 @@ class RegisterCard extends React.Component {
 		this.web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
 		this.storage = new this.web3.eth.Contract(StorageABI, StorageAddress);
 		this.logic = new this.web3.eth.Contract(LogicV0ABI, StorageAddress);
-		this.getAccount();
 	}
 
 	async getAccount() {
 		try {
-			const accounts = await this.web3.eth.getAccounts();
-			this.setState({ account: accounts[0] });
-		} catch (e) {
-			console.log("web3.getAccounts failed");
-			try {
-				this.state.account = window.ethereum.selectedAddress;
-			} catch(e) {
-				alert("please install/unlock metamask!")
-			}
+			await window.ethereum.enable();
+			this.state.account = window.ethereum.selectedAddress;
+		} catch(e) {
+			alert("please install/unlock metamask!")
 		}
 	}
 
 	async connectWallet() {
+		await this.getAccount();
 		console.log(this.state)
 		// check if already registered, if yes, goto main page
 		const user = await this.logic.methods.get_user(this.state.account).call();
@@ -60,8 +55,8 @@ class RegisterCard extends React.Component {
 	}
 
 	async register() {
+		await this.getAccount();
 		const impl = await this.storage.methods.implementation().call();
-		console.log(impl)
 		console.log(this.state)
 		// call contract, register user
 		var sex = false; // false for boy, true for girl
